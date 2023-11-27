@@ -15,7 +15,12 @@ export const fetchByQuery = async query => {
   return response.data.results;
 };
 
-export const fetchMovieById = async id => {
-  const response = await axios.get(`3/search/movie/${id}`);
-  return response.data.results;
+export const fetchById = async id => {
+  const response = await axios.get(`3/movie/${id}`);
+  return response.data;
+};
+
+export const fetchCastId = async id => {
+  const response = await axios.get(`3/movie/${id}/credits`);
+  return response.data.cast;
 };
