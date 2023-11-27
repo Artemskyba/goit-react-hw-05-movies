@@ -24,7 +24,9 @@ export default function Cast() {
   const baseImgUrl = 'https://image.tmdb.org/t/p/w200';
   const defaultImg =
     'https://img.freepik.com/premium-vector/cool-man-profile-photo-icon-profile-icon-male-head-face-flat-design-vector-illustration_750364-393.jpg?w=200';
-  return (
+  return isLoading ? (
+    <div>LOADING</div>
+  ) : (
     <ul>
       {cast.map(({ character, id, name, profile_path }) => {
         return (

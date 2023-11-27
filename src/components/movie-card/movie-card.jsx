@@ -1,5 +1,3 @@
-import { NavLink } from 'react-router-dom';
-
 export const MovieCard = ({ movieInfo }) => {
   const {
     original_title,

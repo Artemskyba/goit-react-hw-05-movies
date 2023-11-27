@@ -2,7 +2,7 @@ import { fetchByQuery } from 'api';
 import { MoviesList } from 'components/movies-list/movies-list';
 import { SearchForm } from 'components/search-form/search-form';
 import { useEffect, useState } from 'react';
-import { NavLink, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);

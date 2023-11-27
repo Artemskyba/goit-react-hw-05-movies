@@ -21,7 +21,9 @@ export default function MovieDetails() {
     }
     fetchMovieById();
   }, [movieId]);
-  return (
+  return isLoading ? (
+    <div>LOADING</div>
+  ) : (
     <>
       {movieInfo && <MovieCard movieInfo={movieInfo} />}
       <div>
