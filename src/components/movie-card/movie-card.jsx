@@ -1,5 +1,13 @@
 import { useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import {
+  GoBackButton,
+  MovieCardWrapper,
+  MovieImage,
+  MovieInfoText,
+  MovieInfoTitles,
+  Movietitle,
+} from './movie-card.styled';
 
 export const MovieCard = ({ movieInfo }) => {
   const {
@@ -21,31 +29,31 @@ export const MovieCard = ({ movieInfo }) => {
   return (
     <>
       <Link to={backLink.current}>
-        <button>GO BACK</button>
+        <GoBackButton>GO BACK</GoBackButton>
       </Link>
-      <div>
-        <img
+      <MovieCardWrapper>
+        <MovieImage
           src={poster_path ? `${baseImgUrl}${poster_path}` : defaultImg}
           alt={original_title}
-        ></img>
+        ></MovieImage>
         <div>
-          <h1>
+          <Movietitle>
             {original_title} ({year})
-          </h1>
-          <p>
+          </Movietitle>
+          <MovieInfoText>
             <b>User Score: </b>
             {Math.ceil(vote_average * 10)}%
-          </p>
-          <h2>Overview</h2>
-          <p>{overview}</p>
-          <h2>Genres</h2>
-          <p>
+          </MovieInfoText>
+          <MovieInfoTitles>Overview</MovieInfoTitles>
+          <MovieInfoText>{overview}</MovieInfoText>
+          <MovieInfoTitles>Genres</MovieInfoTitles>
+          <MovieInfoText>
             {genres.map(({ id, name }) => {
               return <span key={id}>{name}</span>;
             })}
-          </p>
+          </MovieInfoText>
         </div>
-      </div>
+      </MovieCardWrapper>
     </>
   );
 };

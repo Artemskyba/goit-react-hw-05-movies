@@ -44,7 +44,9 @@ export default function Reviews() {
           );
         })
       ) : (
-        <b>There is no reviews</b>
+        <p>
+          <b>There is no reviews</b>
+        </p>
       )}
     </ul>
   );

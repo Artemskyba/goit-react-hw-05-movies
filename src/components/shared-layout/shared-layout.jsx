@@ -1,17 +1,23 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import {
+  Header,
+  LayoutWrapper,
+  NavLink,
+  Navigation,
+} from './shared-layout.styled';
 
 export default function SharedLayout() {
   return (
-    <div>
-      <header>
-        <nav>
+    <LayoutWrapper>
+      <Header>
+        <Navigation>
           <NavLink to={'/'}>Home</NavLink>
           <NavLink to={'/movies'}>Movies</NavLink>
-        </nav>
-      </header>
+        </Navigation>
+      </Header>
       <main>
         <Outlet />
       </main>
-    </div>
+    </LayoutWrapper>
   );
 }

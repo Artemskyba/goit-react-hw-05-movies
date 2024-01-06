@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchCastId } from '../../api';
+import { CastListCard, CastStyledList, Charecter } from './cast.styled';
 
 export default function Cast() {
   const { movieId } = useParams();
@@ -33,19 +34,19 @@ export default function Cast() {
       <b>:{'\u0028'}</b>Something went wrong{' '}
     </div>
   ) : (
-    <ul>
+    <CastStyledList>
       {cast.map(({ character, id, name, profile_path }) => {
         return (
-          <li key={id}>
+          <CastListCard key={id}>
             <img
               src={profile_path ? `${baseImgUrl}${profile_path}` : defaultImg}
               alt="original_name"
             />
-            <h3>{character}</h3>
+            <Charecter>{character}</Charecter>
             <p>{name}</p>
-          </li>
+          </CastListCard>
         );
       })}
-    </ul>
+    </CastStyledList>
   );
 }

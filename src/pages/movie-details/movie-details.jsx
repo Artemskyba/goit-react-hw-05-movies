@@ -1,7 +1,12 @@
 import { fetchById } from 'api';
 import { MovieCard } from 'components/movie-card/movie-card';
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
+import {
+  AdditionaInfo,
+  AdditionalInfoWrapper,
+  NavLink,
+} from './movie-details.styled';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
@@ -30,14 +35,16 @@ export default function MovieDetails() {
       <b>:{'\u0028'}</b>Something went wrong{' '}
     </div>
   ) : (
-    <>
+    <div>
       {movieInfo && <MovieCard movieInfo={movieInfo} />}
-      <div>
-        <p>Additional information</p>
+      <AdditionalInfoWrapper>
+        <AdditionaInfo>
+          <b>Additional information</b>
+        </AdditionaInfo>
         <NavLink to={'cast'}>Cast</NavLink>
         <NavLink to={'reviews'}>Rewiews</NavLink>
-      </div>
+      </AdditionalInfoWrapper>
       <Outlet />
-    </>
+    </div>
   );
 }
