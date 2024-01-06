@@ -18,7 +18,6 @@ export const MovieCardWrapper = styled.div`
 
 export const MovieImage = styled.img`
   width: 400px;
-  margin: 0 auto;
 `;
 
 export const Movietitle = styled.h1`
