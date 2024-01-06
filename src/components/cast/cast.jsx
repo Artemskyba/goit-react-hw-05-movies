@@ -6,6 +6,7 @@ export default function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchCastByMovie() {
@@ -14,6 +15,7 @@ export default function Cast() {
         const response = await fetchCastId(movieId);
         setCast(response);
       } catch (error) {
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -26,6 +28,10 @@ export default function Cast() {
     'https://img.freepik.com/premium-vector/cool-man-profile-photo-icon-profile-icon-male-head-face-flat-design-vector-illustration_750364-393.jpg?w=200';
   return isLoading ? (
     <div>LOADING</div>
+  ) : error ? (
+    <div>
+      <b>:{'\u0028'}</b>Something went wrong{' '}
+    </div>
   ) : (
     <ul>
       {cast.map(({ character, id, name, profile_path }) => {

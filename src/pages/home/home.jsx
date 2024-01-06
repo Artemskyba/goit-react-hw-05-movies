@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchTrendingMovies() {
@@ -13,6 +14,7 @@ export default function Home() {
         const response = await fetchTrending();
         setMovies(response);
       } catch (error) {
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -20,5 +22,13 @@ export default function Home() {
     fetchTrendingMovies();
   }, []);
 
-  return isLoading ? <div>LOADING</div> : <MoviesList movies={movies} />;
+  return isLoading ? (
+    <div>LOADING</div>
+  ) : error ? (
+    <div>
+      <b>:{'\u0028'}</b>Something went wrong{' '}
+    </div>
+  ) : (
+    <MoviesList movies={movies} />
+  );
 }

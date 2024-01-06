@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 export default function Reviews() {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
 
@@ -16,7 +17,7 @@ export default function Reviews() {
         const fetchedReviews = await fetchReviews(movieId);
         setReviews(fetchedReviews);
       } catch (error) {
-        alert(error.message);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -25,9 +26,13 @@ export default function Reviews() {
   }, [movieId]);
   return (
     <ul>
-      {isLoading && <div>LOADING</div>}
-
-      {reviews.length > 0 ? (
+      {isLoading ? (
+        <div>LOADING</div>
+      ) : error ? (
+        <div>
+          <b>:{'\u0028'}</b>Something went wrong{' '}
+        </div>
+      ) : reviews.length > 0 ? (
         reviews.map(review => {
           const { id, author_details, content } = review;
           return (

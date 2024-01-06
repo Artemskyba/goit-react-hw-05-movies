@@ -7,6 +7,7 @@ export default function MovieDetails() {
   const { movieId } = useParams();
   const [movieInfo, setMovieInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchMovieById() {
@@ -15,6 +16,7 @@ export default function MovieDetails() {
         const response = await fetchById(movieId);
         setMovieInfo(response);
       } catch (error) {
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -23,6 +25,10 @@ export default function MovieDetails() {
   }, [movieId]);
   return isLoading ? (
     <div>LOADING</div>
+  ) : error ? (
+    <div>
+      <b>:{'\u0028'}</b>Something went wrong{' '}
+    </div>
   ) : (
     <>
       {movieInfo && <MovieCard movieInfo={movieInfo} />}

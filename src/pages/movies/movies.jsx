@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [params, setParams] = useSearchParams();
   const query = params.get('query') ?? '';
 
@@ -23,6 +24,7 @@ export default function Movies() {
           setMovies(response);
         }
       } catch (error) {
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -33,7 +35,15 @@ export default function Movies() {
   return (
     <>
       <SearchForm onSubmit={handleSubmit} />
-      {isLoading ? <div>LOADING</div> : <MoviesList movies={movies} />}
+      {isLoading ? (
+        <div>LOADING</div>
+      ) : error ? (
+        <div>
+          <b>:{'\u0028'}</b>Something went wrong{' '}
+        </div>
+      ) : (
+        <MoviesList movies={movies} />
+      )}
     </>
   );
 }

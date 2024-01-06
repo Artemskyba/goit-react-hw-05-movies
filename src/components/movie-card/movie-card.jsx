@@ -1,3 +1,6 @@
+import { useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 export const MovieCard = ({ movieInfo }) => {
   const {
     original_title,
@@ -7,13 +10,19 @@ export const MovieCard = ({ movieInfo }) => {
     vote_average,
     overview,
   } = movieInfo;
+
   const baseImgUrl = 'https://image.tmdb.org/t/p/w300';
   const defaultImg =
     'https://shop.stryi-tur.info/wp-content/uploads/2022/11/161.jpg';
   const year = release_date.split('-')[0];
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? '/');
+
   return (
     <>
-      <button>GO BACK</button>
+      <Link to={backLink.current}>
+        <button>GO BACK</button>
+      </Link>
       <div>
         <img
           src={poster_path ? `${baseImgUrl}${poster_path}` : defaultImg}
